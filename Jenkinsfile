@@ -16,7 +16,9 @@ pipeline {
     stages {
         stage('Terraform Init') {
             steps {
-                sh 'terraform init'
+                dir("/home/saivardhan63") {
+                    sh 'terraform init'
+                }
             }
         }
 
@@ -25,8 +27,10 @@ pipeline {
                 expression { params.ACTION == 'apply' }
             }
             steps {
-                sh 'terraform plan'
-                sh 'terraform apply -auto-approve'
+                dir("/home/saivardhan63") {
+                    sh 'terraform plan'
+                    sh 'terraform apply -auto-approve'
+                }
             }
         }
 
@@ -35,7 +39,9 @@ pipeline {
                 expression { params.ACTION == 'destroy' }
             }
             steps {
-                sh 'terraform destroy -auto-approve'
+                dir("/home/saivardhan63") {
+                    sh 'terraform destroy -auto-approve'
+                }
             }
         }
     }
