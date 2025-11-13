@@ -16,7 +16,7 @@ pipeline {
     stages {
         stage('checkout SCM'){
             steps{
-                cleanws()
+                cleanWs() 
                sh "git clone https://github.com/Nagasai634/team-usecases.git"
             }
         }
