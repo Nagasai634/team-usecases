@@ -1,7 +1,7 @@
 provider "google" {
     project = "venkat-473005"
     region = "us-central1"
-    credentials = file("creds.json")
+    #credentials = file("creds.json")
 }
 
 resource "google_compute_instance" "vm" {
