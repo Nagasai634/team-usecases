@@ -11,6 +11,7 @@ pipeline {
         BUILD = '/var/lib/jenkins/workspace/nag-first/spring-petclinic'
         UPLOAD_GCS = '/var/lib/jenkins/workspace/nag-first/spring-petclinic/target'
         ARTIFACT = 'spring-petclinic-4.0.0-SNAPSHOT.jar'
+
     }
     stages {
         stage('checkout') {
@@ -24,6 +25,24 @@ pipeline {
                 dir("${BUILD}") {
                     echo "Building ${APPLICATION_NAME}"
                     sh "mvn clean package -DskipTests=true"
+                }
+            }
+        }
+        stage('SonarQube Analysis') {
+            agent {
+                label 'slave-vm'
+            }
+            steps {
+                dir("${BUILD}") {
+                    echo "Running SonarQube Analysis"
+                    withSonarQubeEnv('sonar-server-id') {
+                       withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+                                sh """
+                                mvn sonar:sonar \
+                                  -Dsonar.projectKey=${APPLICATION_NAME} 
+                            """
+                        }
+                    }
                 }
             }
         }
@@ -45,3 +64,7 @@ pipeline {
         }
     }
 }
+
+
+
+   
