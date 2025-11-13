@@ -9,6 +9,10 @@ pipeline {
         )
     }
 
+    environment {
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-service-account')
+    }
+
     stages {
         stage('Terraform Init') {
             steps {
