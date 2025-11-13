@@ -14,12 +14,12 @@ pipeline {
     }
 
     stages {
-        // stage('checkout SCM'){
-        //     steps{
-        //         cleanWs() 
-        //        sh "git clone https://github.com/Nagasai634/team-usecases.git"
-        //     }
-        // }
+        stage('checkout SCM'){
+            steps{
+                cleanWs() 
+               sh "git clone https://github.com/Nagasai634/team-usecases.git"
+            }
+        }
         stage('Terraform Init') {
             steps {
                 dir("/var/lib/jenkins/workspace/new-job") {
