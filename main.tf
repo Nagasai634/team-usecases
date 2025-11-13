@@ -1,21 +1,21 @@
 provider "google" {
-    project = ""
-    region = ""
-    credentials = file("")
+    project = "venkat-473005"
+    region = "us-central1"
+    credentials = file("creds.json")
 }
 
 resource "google_compute_instance" "vm" {
     count = 2
     name = "vm-${count.index}"
-    zone = ""
-    machine_type = ""
+    zone = "us-central1-a"
+    machine_type = "e2-micro"
     boot_disk {
       initialize_params {
-        image = ""
+        image = "ubuntu-os-cloud/ubuntu-2204-lts-amd64"
       }
     }
     network_interface {
-      network = ""
+      network = "default"
       access_config {
         
       }
