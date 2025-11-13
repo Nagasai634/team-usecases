@@ -14,6 +14,12 @@ pipeline {
     }
 
     stages {
+        stage('checkout SCM'){
+            steps{
+                cleanws()
+               sh "git clone https://github.com/Nagasai634/team-usecases.git"
+            }
+        }
         stage('Terraform Init') {
             steps {
                 dir("/home/saivardhan63") {
