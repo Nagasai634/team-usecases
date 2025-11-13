@@ -20,5 +20,5 @@ resource "google_compute_instance" "vms" {
         
       }
     }
-    metadata_startup_script = file("startup-script.sh")
+    metadata_startup_script = file("./startup-script.sh")
 }

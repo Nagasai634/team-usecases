@@ -35,7 +35,7 @@ pipeline {
             steps {
                 dir("/var/lib/jenkins/workspace/new-job") {
                     sh 'terraform plan'
-                    sh 'terraform apply -auto-approve'
+                    sh 'terraform apply --auto-approve'
                 }
             }
         }
@@ -46,7 +46,7 @@ pipeline {
             }
             steps {
                 dir("/var/lib/jenkins/workspace/new-job") {
-                    sh 'terraform destroy -auto-approve'
+                    sh 'terraform destroy --auto-approve'
                 }
             }
         }
