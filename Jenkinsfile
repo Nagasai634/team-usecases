@@ -14,15 +14,15 @@ pipeline {
     }
 
     stages {
-        stage('checkout SCM'){
-            steps{
-                cleanWs() 
-               sh "git clone https://github.com/Nagasai634/team-usecases.git"
-            }
-        }
+        // stage('checkout SCM'){
+        //     steps{
+        //         cleanWs() 
+        //        sh "git clone https://github.com/Nagasai634/team-usecases.git"
+        //     }
+        // }
         stage('Terraform Init') {
             steps {
-                dir("/home/saivardhan63") {
+                dir("/var/lib/jenkins/workspace/new-job") {
                     sh 'terraform init'
                 }
             }
@@ -33,7 +33,7 @@ pipeline {
                 expression { params.ACTION == 'apply' }
             }
             steps {
-                dir("/home/saivardhan63") {
+                dir("/var/lib/jenkins/workspace/new-job") {
                     sh 'terraform plan'
                     sh 'terraform apply -auto-approve'
                 }
@@ -45,7 +45,7 @@ pipeline {
                 expression { params.ACTION == 'destroy' }
             }
             steps {
-                dir("/home/saivardhan63") {
+                dir("/var/lib/jenkins/workspace/new-job") {
                     sh 'terraform destroy -auto-approve'
                 }
             }
