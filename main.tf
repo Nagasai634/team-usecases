@@ -4,9 +4,9 @@ provider "google" {
     #credentials = file("creds.json")
 }
 
-resource "google_compute_instance" "vm" {
+resource "google_compute_instance" "vms" {
     count = 2
-    name = "vm-${count.index}"
+    name = "terraform-${count.index}"
     zone = "us-central1-a"
     machine_type = "e2-micro"
     boot_disk {
