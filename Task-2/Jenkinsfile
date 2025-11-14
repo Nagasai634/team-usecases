@@ -28,24 +28,6 @@ pipeline {
                 }
             }
         }
-        stage('SonarQube Analysis') {
-            agent {
-                label 'slave-vm'
-            }
-            steps {
-                dir("${BUILD}") {
-                    echo "Running SonarQube Analysis"
-                    withSonarQubeEnv('sonar-server-id') {
-                       withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
-                                sh """
-                                mvn sonar:sonar \
-                                  -Dsonar.projectKey=${APPLICATION_NAME} 
-                            """
-                        }
-                    }
-                }
-            }
-        }
         stage('UploadtoGCS') {
             steps{
                 dir("${UPLOAD_GCS}") {
