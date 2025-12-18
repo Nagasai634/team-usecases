@@ -46,6 +46,7 @@ pipeline {
             }
             steps {
                 dir("/var/lib/jenkins/workspace/new-job") {
+                    sh 'terraform init'
                     sh 'terraform destroy --auto-approve'
                 }
             }
